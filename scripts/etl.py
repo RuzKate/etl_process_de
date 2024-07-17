@@ -8,11 +8,30 @@ from scripts.load import LoadDatabase
 
 class Etl:
     def __init__(self, extractor: ExtractData, transformer: TransformData, loader: LoadDatabase):
+        """Инициализатор класса
+        
+            :param extractor: объект, который отвечает за извлечение данных 
+            :type extractor: объект класса ExtractData
+
+            :param transformer: объект, который отвечает за преобразование извлеченных данных
+            :type transformer: объект класса TransformData
+
+            :param loader: объект, который отвечает за загрузку преобразованных данных в базу данных
+            :type loader: объект класса LoadDatabase
+        """
         self.extractor = extractor
         self.transformer = transformer
         self.loader = loader
 
     def etl_process(self, table_name, engine):
+        """Реализация ETL-процесса с логированием
+        
+            :param table_name: название таблицы 
+            :type table_name: str
+
+            :param engine: движок, отвечающий за взаимодействие с базой данных
+            :type engine: объект класса Engine
+        """
         start_time = datetime.now()
 
         with engine.connect() as conn:      
