@@ -3,10 +3,10 @@ class TransformData:
     def transform_data(self, data, table_name):
         """Трансформация данных
 
-            :param data: извлеченные данные из csv файла
+            :param data: извлеченные данные из CSV-файла
             :type data: DataFrame
 
-            :param table_name: имя файла
+            :param table_name: название таблицы
             :type table_name: str
         """
         data.rename(columns=lambda x: x.lower(), inplace=True)
