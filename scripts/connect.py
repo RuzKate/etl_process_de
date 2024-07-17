@@ -2,16 +2,7 @@ from sqlalchemy import create_engine
 
 class DatabaseConnect:
     def __init__(self, db_name, db_user, db_password, db_host, db_port):
-        self.db_name = db_name
-        self.db_user = db_user
-        self.db_password = db_password
-        self.db_host = db_host
-        self.db_port = db_port
-        self.engine = None
-
-
-    def connect_to_db(self):
-        """Создание движка для подключения к базе данных
+        """Инициализатор класса
 
             :param db_name: название базы данных
             :type db_name: str
@@ -27,10 +18,17 @@ class DatabaseConnect:
 
             :param db_port: порт для подключения
             :type db_port: str
-            
-            :rtype: объект класса Engine
-            :return: движок, отвечающий за взаимодействие с базой данных
         """
+        self.db_name = db_name
+        self.db_user = db_user
+        self.db_password = db_password
+        self.db_host = db_host
+        self.db_port = db_port
+        self.engine = None
+
+
+    def connect_to_db(self):
+        """Создание движка для подключения к базе данных"""
         try:
             self.engine = create_engine(
                 f'postgresql+psycopg2://{self.db_user}:{self.db_password}@{self.db_host}:{self.db_port}/{self.db_name}')
