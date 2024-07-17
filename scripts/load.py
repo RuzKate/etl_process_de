@@ -6,22 +6,23 @@ from scripts.extract import ExtractData
 
 class LoadDatabase:
     def __init__(self, table_name, connection: DatabaseConnect, extractor: ExtractData):
+        """Инициализатор класса
+
+            :param table_name: название таблицы
+            :type table_name: str
+
+            :param connection: объект, который отвечает за взаимодействие с базой данных
+            :type connection: объект класса DatabaseConnect
+
+            :param extractor: объект, который отвечает за извлечение данных
+            :type extractor: объект класса ExtractData
+        """
         self.table_name = table_name
         self.engine = connection.engine
         self.extractor = extractor
 
     def load_to_db(self):
-        """Загрузка данных в базу данных
-
-            :param data: извлеченные данные из csv файла
-            :type data: DataFrame
-
-            :param table_name: имя файла
-            :type table_name: str
-
-            :param engine: движок, отвечающий за взаимодействие с базой данных
-            :type engine: объект класса Engine
-        """
+        """Загрузка данных в базу данных"""
         inspector = inspect(self.engine)
         primary_key_columns = inspector.get_pk_constraint(table_name=self.table_name, schema='ds')['constrained_columns']
         
